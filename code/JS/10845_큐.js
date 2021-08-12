@@ -1,39 +1,46 @@
 const fs = require('fs');
 let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
-let input = ['15','push 1','push 2','front','back','size','empty','pop','pop','pop','size','empty','pop','push 3','empty','front'];
+// let input = ['15','push 1','push 2','front','back','size','empty','pop','pop','pop','size','empty','pop','push 3','empty','front'];
 
 let queue = [];
 input[0] = '_';
 let ret = '';
+
 const _push = (num) =>{
     queue[queue.length] = num;
 };
 
 const _pop = () => {
-    let len = stack.length;
+    let len = queue.length;
     if(!len){
         ret += '-1\n'
     }else{
-        ret += stack[len-1]+'\n';
-        stack.length=len-1;
+        ret += queue[0] + '\n';
+        queue.shift();
     }
 };
 
 const _size = () => {
-    ret += stack.length+'\n';
+    ret += queue.length+'\n';
 };
 
 const _empty = () => {
-    ret += stack.length ? '0\n' : '1\n';
+    ret += queue.length ? '0\n' : '1\n';
 };
 
-const _top = () => {
-    let len = stack.length;
-    if(!len){
+const _front = () => {
+    if(!queue.length)
         ret += '-1\n';
-    }else
-        ret += stack[len-1]+'\n';
+    else   
+        ret += queue[0] + '\n';
+};
+
+const _back = () => {
+    if(!queue.length)
+        ret += '-1\n';
+    else   
+        ret += queue[queue.length - 1] + '\n';
 };
 
 input.forEach(c=> {
@@ -47,8 +54,11 @@ input.forEach(c=> {
         case 'empty':
             _empty();
             break;
-        case 'top':
-            _top();
+        case 'front':
+            _front();
+            break;
+        case 'back':
+            _back();
             break;
         case '_':
             break;

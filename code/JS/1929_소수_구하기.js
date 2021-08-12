@@ -1,28 +1,26 @@
-// const fs = require('fs');
-// let input = fs.readFileSync('/dev/stdin').toString().split(' ');
-let input = ['1','1000000']
+const fs = require('fs');
+let input = fs.readFileSync('/dev/stdin').toString().trim().split(' ');
+// let input = ['1','3']
 const a = parseInt(input[0]);
 const b = parseInt(input[1]);
-let arr = [b].fill(0);
+let ret = '';
 
-for(let i = a ; i < b ; i ++){
-    
+if(b <= 1)
+    return;
+
+let arr = new Array(b+1).fill(true);
+arr[0] = false;
+arr[1] = false;
+
+for(let i = 2 ; i <= b ; i ++){
+    if(arr[i]){
+        for(let j = i * i ; j <= b ; j+=i )
+            arr[j] = false;
+    }
 }
-// let ret = '';
-// const isPrime = (num) => {
-//     if(num === 0 || num === 1)
-//         return false;
-//     if(num === 2 || num === 3)
-//         return true;
-//     for(let i = 2 ; i <= num / 2 ; i ++){
-//         if(num % i === 0)
-//             return false;
-//     }
-//     return true;
-// }
 
-// for(let i = parseInt(input[0]) ; i <= parseInt(input[1]) ; i++){
-//     if(isPrime(i))
-//         ret += i+'\n';
-// }
-// console.log(ret)
+for(let i = a ; i <= b ; i ++){
+    if(arr[i])
+        ret += i + '\n'
+}
+console.log(ret.trim());
