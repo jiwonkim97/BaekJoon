@@ -3,7 +3,7 @@ let input = fs.readFileSync('/dev/stdin').toString().split('\n');
 const cardNum = parseInt(input[0].split(' ')[0]);
 const M = parseInt(input[0].split(' ')[1]);
 let arr = input[1].split(' ');
-arr = arr.map(c => parseInt(c)).sort((a,b) => {return a-b})
+arr = arr.map(c => parseInt(c)).sort((a, b) => { return a - b })
 let ret = 0;
 
 // const cardNum = 5;
@@ -12,17 +12,17 @@ let ret = 0;
 // let ret = 0;
 // arr = arr.map(c => parseInt(c)).sort((a,b) => {return a-b})
 
-for(let i = 0 ; i < cardNum-2 ; i ++){
-    if(arr[i] > M)
+for (let i = 0; i < cardNum - 2; i++) {
+    if (arr[i] > M)
         break;
-    for(let j = i+1 ; j < cardNum-1 ; j ++){
-        if(arr[i] + arr[j] > M)
+    for (let j = i + 1; j < cardNum - 1; j++) {
+        if (arr[i] + arr[j] > M)
             break;
-        for(let k = j+1; k < cardNum ; k ++){
+        for (let k = j + 1; k < cardNum; k++) {
             let sum = arr[i] + arr[j] + arr[k];
-            if(sum > M)
+            if (sum > M)
                 break;
-            if(sum > ret)
+            if (sum > ret)
                 ret = arr[i] + arr[j] + arr[k];
         }
     }
