@@ -1,16 +1,16 @@
-const fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');   // input은 줄 단위로 끊어진 배열로 저장 및 string임.
+// const fs = require('fs');
+// let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');   // input은 줄 단위로 끊어진 배열로 저장 및 string임.
 
-// let input = [
-//   '7',
-//   'A B C',
-//   'B D .',
-//   'C E F',
-//   'E . .',
-//   'F . G',
-//   'D . .',
-//   'G . .',
-// ]
+let input = [
+  '7',
+  'A B C',
+  'B D .',
+  'C E F',
+  'E . .',
+  'F . G',
+  'D . .',
+  'G . .',
+]
 
 input.shift();  // 입력값 첫 내용 삭제
 let dict = {};  // 딕셔너리 생성
@@ -20,6 +20,7 @@ input.map(c => {
   dict[c.shift()] = c;  //  딕셔너리에 shift()한 값을 key, 남은 배열을 value로 갖는 pair 추가
 });
 
+console.log(dict);
 const preorder = (c) => { // c는 현재 조회하려는 값
   if (c === '.') {  // . 을 받으면 빈 문자열 리턴
     return '';
