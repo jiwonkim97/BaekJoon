@@ -1,9 +1,9 @@
-const fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');   // input은 줄 단위로 끊어진 배열로 저장 및 string임.
+// const fs = require('fs');
+// let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');   // input은 줄 단위로 끊어진 배열로 저장 및 string임.
 
-// let input = [
-//   '27'
-// ]
+let input = [
+  '27'
+]
 
 let N = Number(input[0]); // 주어진 정수를 N에 저장
 const arr = Array.from(Array(N), () => new Array(N).fill(' ')); // N*N 크기의 2차원 배열 생성 및 공백으로 초기화
