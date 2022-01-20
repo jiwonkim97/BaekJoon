@@ -1,56 +1,148 @@
-let songs = [
-  ['김보균', '김재훈', '김채웅', '김지원', '정재화'], //사계
-  ['정재환', '문수빈', '한지우', '박세영', '조민영'], //배데빗
-  ['박준호', '김재훈', '김채웅', '한지우', '이미르', '정재화'], //알루미늄
-  // ['박지한', '김재훈', '김채웅', '박세영', '정재화'], //무이이야                      금요일 안함
-  ['전민', '김보균', '김재훈', '김채웅', '한지우', '박세영', '이선주'],  //컴플    수요일 안함
-  // ['이강희', '박지한', '문수빈', '김재훈', '조민영', '김지원', '이선주'], //너에게난  금요일 안함
-  ['정재환', '박준호', '김채웅', '김지원', '이미르', '조민영'], //사랑할수록
-  ['이강희', '김재훈', '문수빈', '김채웅', '김지원', '정재화'], //신호등
-  ['전민', '문수빈', '김지원'] //운전면허                                         수요일 안함
-]
-let songs_name = [
-  '사계',
-  'bad habit',
-  '알루미늄',
-  // '무이이야',             //금 안함
-  'complicated',          //수 안함
-  // '너에게 난 나에게 넌',  //금 안함
-  '사랑할수록',
-  '신호등',
-  'drivers license'       //수 안함
-]
-let len = songs.length;
-let limit = 11;
-let times = [[], []];
+let songs = {
+    'someone like you': ['김보균', '전민', '김지원'],
+    '단발머리': ['이강희', '김선우', '박건도', '한지우', '김수아', '김채웅'],
+    '너의 바다': ['박시현', '박지한', '박건도','김채웅', '김지원', '박세영', '이선주'],
+    '다시만난세계': ['김보균', '이지호', '홍윤표', '김지원', '정재화'],
+    'Champagne Supernova': ['전민' ,'김재훈', '박건도', '김채웅', '김수아', '정재화'],
+    '지독하게': ['김선우', '이지호', '김재훈', '박건도', '홍윤표', '박세영', '이선주'],
+    'tiny riot': ['박지한', '김채웅', '김수아', '정재화'],
+    '여기에 있자': ['박시현', '이지호', '김재훈', '한지우', '이선주'],
+    '스물다섯 스물하나': ['이강희', '문수빈', '이지호', '한지우', '박세영', '정재화']
+  };
+  let session = ['김보균', '김선우', '김수아', '김재훈', '김지원', '김채웅', '문수빈', '박건도', '박세영', '박시현', '박지한', '이강희', '이선주', '이지호',  '전민', '정재화', '한지우', '홍윤표'];
 
-for (let i = 0; i < len - 3; i++) {
-  for (let j = i + 1; j < len - 2; j++) {
-    for (let k = j + 1; k < len - 1; k++) {
-      for (let l = k + 1; l < len; l++) {
-        if ([...new Set([i, j, k, l])].length !== 4)
-          continue;
-        for (let m = 0; m < len; m++) {
-          if (m === i || m === j || m === k || m === l) {
-            times[0].push(...songs[m]);
-          }
-          else {
-            times[1].push(...songs[m]);
-          }
 
-          times[0] = [...new Set([...times[0]])];
-          times[1] = [...new Set([...times[1]])];
-        }
-        if (times[0].length < limit + 1 && times[1].length < limit + 1) {
-          console.log(songs_name[i] + ' ' + songs_name[j] + ' ' + songs_name[k] + ' ' + songs_name[l]);
-          console.log(times[0]);
-          console.log(times[0].length);
-
-          console.log(times[1]);
-          console.log(times[1].length);
-        }
-        times = [[], []];
-      }
-    }
+  let unableTime = {
+    '김보균' : ['0 8, 19 24','0 8, 19 24','0 8, 15 18, 22 24','0 18, 19 24','0 18, 22 24','0 8, 22 24','0 8, 22 24'], //
+    '김선우' : ['0 17, 22 24','0 17, 22 24','0 17, 22 24','0 17, 22 24','0 17, 22 24','0 8, 22 24','0 8, 22 24'], //
+    '김수아' : ['0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 24','0 8, 22 24','0 24'],  //
+    '김재훈' : ['0 8, 22 24','0 8, 22 24','0 8, 22 24','0 24','0 24','0 8, 22 24','0 8, 22 24'],  //
+    '김지원' : ['0 8, 19 24','0 8, 19 24','0 8, 22 24','0 8, 19 24','0 8, 22 24','0 8, 22 24','0 8, 22 24'],  //
+    '김채웅' : ['0 8, 22 24','0 8, 22 24','0 8, 18 20, 22 24','0 8, 22 24','0 8, 22 24','0 24','0 24'],  //
+    '문수빈' : ['0 8, 18 24','0 8, 22 24','0 8, 18 24','0 8, 22 24','0 8, 18 24','0 8, 22 24','0 8, 22 24'],  //
+    '박건도' : ['0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24'],  //
+    '박세영' : ['0 8, 22 24','0 8, 22 24','0 8, 16 24','0 8, 22 24','0 8, 16 24','0 13, 22 24','0 13, 22 24'],  //
+    '박시현' : ['0 8, 16 24','0 8, 22 24','0 8, 15 17, 22 24','0 8, 16 24','0 8, 22 24','0 8, 22 24','0 8, 22 24'], //
+    '박지한' : ['0 8, 22 24','0 8, 15 24','0 8, 14 24','0 8, 15 24','0 8, 15 24','0 8, 22 24','0 8, 22 24'], //
+    '이강희' : ['0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 24','0 24'],  //
+    '이선주' : ['0 8, 22 24','0 8, 20 24','0 8, 22 24','0 8, 20 24','0 8, 22 24','0 8, 22 24','0 8, 22 24'],//
+    '이지호' : ['0 8, 16 24','0 8, 16 24','0 8, 16 24','0 8, 16 24','0 8, 16 24','0 24','0 24'],  //
+    '전민' : ['0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24'],  //
+    '정재화' : ['0 15, 22 24','0 15, 22 24','0 15, 18 20, 22 24','0 15, 22 24','0 15, 22 24','0 8, 22 24','0 8, 22 24'],  //
+    '한지우' : ['0 8, 22 24','0 8, 22 24','0 8, 18 20, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24','0 8, 22 24'], //
+    '홍윤표' : ['0 13, 22 24','0 13, 22 24','0 13, 22 24','0 13, 22 24','0 13, 22 24','0 13, 22 24','0 8, 22 24'] //
   }
+  let songList = ['someone like you',
+  '단발머리',
+  '너의 바다',
+  '다시만난세계',
+  'Champagne Supernova',
+  '지독하게',
+  'tiny riot',
+  '여기에 있자',
+  '스물다섯 스물하나'
+];
+
+let ableTime = {
+    'someone like you': new Array(7),
+    '단발머리': new Array(7),
+    '너의 바다': new Array(7),
+    '다시만난세계': new Array(7),
+    'Champagne Supernova': new Array(7),
+    '지독하게': new Array(7),
+    'tiny riot': new Array(7),
+    '여기에 있자': new Array(7),
+    '스물다섯 스물하나': new Array(7)
+  };
+
+function timeBinary(arr) {
+    let time = new Array(24);
+    time.fill(0);
+    for(let i=0; i<arr.length; i++){
+        let [startTime, endTime] = arr[i].split(' ');
+        for(let j=startTime; j<endTime; j++) time[j] = 1;
+    }
+    return time;
+}
+
+for(let i=0; i<session.length; i++) {
+    for(let j=0; j<7; j++){
+        let timeArray = unableTime[session[i]][j].split(', ');
+        let timeTableArray = timeBinary(timeArray);
+        unableTime[session[i]][j] = timeTableArray.join('');
+    }
+}
+
+for(let i=0; i<songList.length; i++) {
+    //console.log(songList[i]);
+    for(let k=0; k<7; k++) {
+        let dayTableString = '000000000000000000000000'.split('');
+        for(let j=0; j<songs[songList[i]].length; j++) {
+            let memberdayTableString = unableTime[songs[songList[i]][j]][k].split('');
+            for(let l=0; l<24; l++) {
+                if(memberdayTableString[l] == '1') dayTableString[l] = 1;
+            }
+            //console.log(songs[songList[i]][j] + dayTableString.join('') + '\n');
+        }
+        ableTime[songList[i]][k] = dayTableString.join('');
+    }
+}
+//console.log(ableTime);
+
+function outputStringMaker(str) {
+    let arr = new Array(24);
+    let flag = 0;
+    let startTime, endTime;
+    arr = str.split('').map(Number);
+    for(let i=0; i<24; i++) {
+        if(!arr[i]) {
+            flag = 1;
+            startTime = i;
+            while(1){
+                i++;
+                if(arr[i]) {
+                    endTime = i;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    if(!flag) return 0;
+    else return startTime + ' ~ ' + endTime;
+}
+
+for (let i=0; i<songList.length; i++) {
+    console.log(songList[i] + ' 팀은 ');
+    for (let j=0; j<7; j++) {
+        let str = outputStringMaker(ableTime[songList[i]][j]);
+        let output = '';
+        switch(j) {
+            case 0:
+                output += '월요일 ';
+                break;
+            case 1:
+                output += '화요일 ';
+                break;
+            case 2:
+                output += '수요일 ';
+                break;
+            case 3:
+                output += '목요일 ';
+                break;
+            case 4:
+                output += '금요일 ';
+                break;
+            case 5:
+                output += '토요일 ';
+                break;
+            case 6:
+                output += '일요일 ';
+                break;
+        }
+        if(!str) output += '연습이 불가능 합니다.';
+        else output = output + str + '시 연습이 가능합니다.';
+        console.log(output + '\n');
+    }
+    console.log('===================================');
 }

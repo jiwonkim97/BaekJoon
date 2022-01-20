@@ -23,7 +23,7 @@ const fillArr = (row, col) => {
   }
 }
 
-const check = (rowm, col) => {
+const check = (row, col) => {
   if (arr[row][col] === 0) {
     arr[row][col] === 1;
     fillArr(row, col);
