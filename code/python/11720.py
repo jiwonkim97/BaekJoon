@@ -5,5 +5,5 @@ inputStr = input()
 
 for i in range(num):
     sum += int(inputStr[i])
-    
+
 print(sum)
