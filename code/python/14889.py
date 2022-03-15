@@ -11,7 +11,7 @@ def makeTeam(idx, cnt):
   if cnt == N//2:
     global min_
     start, link = 0,0
-    for i in range( N):
+    for i in range(N):
       for j in range(N):
         if team[i] and team[j]:
           start += grid[i][j]
