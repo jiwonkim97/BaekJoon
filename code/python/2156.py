@@ -11,7 +11,7 @@ dp_table.append(wines[0] + wines[1])
 if n == 2:
   print(dp_table.pop())
   exit(0)
-dp_table.append(max(wines[0] + wines[2], wines[1] + wines[2]))
+dp_table.append(max(wines[0] + wines[2], wines[1] + wines[2], dp_table[1]))
 if n == 3:
   print(dp_table.pop())
   exit(0)
